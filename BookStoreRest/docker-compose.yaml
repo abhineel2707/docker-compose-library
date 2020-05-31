@@ -2,6 +2,24 @@ version: '3.1'
 
 # Thil is all in one file
 services:
+    mongo:
+        image: mongo
+        restart: always
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: beingzero
+
+    mssql:
+        # https://mcrflowprodcentralus.cdn.mscr.io/mcrprod/mssql/server?P1=1590931990&P2=1&P3=1&P4=lnj9w6JP%2B1VF8sDNUaAzs2p4IoJPEsfRVvPIl%2FcaG3w%3D&se=2020-05-31T13%3A33%3A10Z&sig=8dYwYB1WFmhanTdb2kwpUpaf34Ze7VROGr8Nw31IuvI%3D&sp=r&sr=b&sv=2015-02-21
+        image: microsoft/mssql-server-linux:2017-latest
+        #command: /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'B3ingZer@' -d master -i /application/database/seed/mssql-init.sql
+        environment:
+            SA_PASSWORD: "B3ingZer@"
+            ACCEPT_EULA: "Y"
+        volumes:
+            - ./database/seed/mssql-init.sql:/application/database/seed/mssql-init.sql:ro
+        ports:
+            - 1433:1433
 
     mysql:
         image: mysql
@@ -14,7 +32,6 @@ services:
         volumes:
             - ./database/seed/mysql-init.sql:/application/database/seed/mysql-init.sql:ro
             - ./database/data:/var/lib/mysql
-              
 
     adminer:
         image: adminer

@@ -11,6 +11,8 @@ docker-compose up -d
 docker-compose -f docker-compose.python.yaml up -d
 ```
 
+## Port Allocations
+
 | App       | Port | URL
 | --------- | -------- |-----|
 | Adminer   | 8000 | http://localhost:8000 |
