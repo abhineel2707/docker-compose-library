@@ -1,0 +1,23 @@
+version: '3.1'
+
+# Thil is all in one file
+services:
+
+    mysql:
+        image: mysql
+        command: --init-file /application/database/seed/mysql-init.sql
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: beingzero
+        ports:
+            - 3306:3306
+        volumes:
+            - ./database/seed/mysql-init.sql:/application/database/seed/mysql-init.sql:ro
+            - ./database/data:/var/lib/mysql
+              
+
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+            - 8000:8080

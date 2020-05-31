@@ -109,4 +109,4 @@ dist
 *.exe
 a.out
 
-database/data/
+data/
