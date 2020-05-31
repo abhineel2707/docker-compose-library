@@ -9,6 +9,15 @@ services:
             MONGO_INITDB_ROOT_USERNAME: root
             MONGO_INITDB_ROOT_PASSWORD: beingzero
 
+    mongo-express:
+        image: mongo-express
+        restart: always
+        ports:
+            - 8001:8081
+        environment:
+            ME_CONFIG_MONGODB_ADMINUSERNAME: root
+            ME_CONFIG_MONGODB_ADMINPASSWORD: beingzero
+
     mssql:
         # https://mcrflowprodcentralus.cdn.mscr.io/mcrprod/mssql/server?P1=1590931990&P2=1&P3=1&P4=lnj9w6JP%2B1VF8sDNUaAzs2p4IoJPEsfRVvPIl%2FcaG3w%3D&se=2020-05-31T13%3A33%3A10Z&sig=8dYwYB1WFmhanTdb2kwpUpaf34Ze7VROGr8Nw31IuvI%3D&sp=r&sr=b&sv=2015-02-21
         image: microsoft/mssql-server-linux:2017-latest
@@ -38,3 +47,4 @@ services:
         restart: always
         ports:
             - 8000:8080
+    
