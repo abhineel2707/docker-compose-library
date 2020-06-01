@@ -22,12 +22,13 @@ services:
     
     springboot:
         restart: always
-        build: ./app
-        working_dir: /app
+        build: ./springboot
+        working_dir: /springboot
         volumes:
-            - ./app:/app
+            - ./springboot:/springboot
             - ~/.m2:/root/.m2
         environment:
+            MYSQL_DATABASE_SERVER_NAME: mysql
             MYSQL_ROOT_USERNAME: root
             MYSQL_ROOT_PASSWORD: beingzero
             SPRING_BOOT_APP_PORT: 8080
