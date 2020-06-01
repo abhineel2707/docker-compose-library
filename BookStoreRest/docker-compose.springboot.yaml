@@ -1,0 +1,36 @@
+version: '3.1'
+
+# Thil is all in one file
+services:
+    mysql:
+        image: mysql
+        command: --init-file /application/database/seed/mysql-init.sql
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: beingzero
+        ports:
+            - 3306:3306
+        volumes:
+            - ./database/seed/mysql-init.sql:/application/database/seed/mysql-init.sql:ro
+            #- ./database/data:/var/lib/mysql
+
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+            - 8000:8080
+    
+    springboot:
+        restart: always
+        build: ./app
+        working_dir: /app
+        volumes:
+            - ./app:/app
+            - ~/.m2:/root/.m2
+        environment:
+            MYSQL_ROOT_USERNAME: root
+            MYSQL_ROOT_PASSWORD: beingzero
+            SPRING_BOOT_APP_PORT: 8080
+        ports:
+            - "8080:8080"
+        command: mvn clean spring-boot:run
